@@ -30,3 +30,5 @@ cp -v /home/vagrant/.ssh/authorized_keys.original /home/vagrant/.ssh/authorized_
         echo "{{ key }}" >> /home/vagrant/.ssh/authorized_keys
     {% endfor %}
 {% endif %}
+
+{% if vd.install_script is defined %}{{ vd.install_script }}{% endif %}

@@ -3,4 +3,6 @@
 cd /data && \
 docker-compose up -d {% if vd.files is defined %}-f {{ vd.files | join(' -f ') }}{% endif %}
 
+{% if vd.run_script is defined %}{{ vd.run_script }}{% endif %}
+
 exit ${?}
