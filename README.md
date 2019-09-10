@@ -62,6 +62,6 @@ vd_docker_compose_src:
 ---
 - hosts: remotedocker
   roles:
-    - role: remote-docker
+    - role: phizzl.remote-docker
       become: yes
 ```
