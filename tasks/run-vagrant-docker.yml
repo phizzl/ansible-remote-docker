@@ -53,3 +53,17 @@
 - name: Running VM
   include_tasks: run-vm.yml
   when: "vd.state is not defined or vd.state == 'up'"
+  register: cmd_result
+  ignore_errors: true
+
+- name: Destroy VM on failure
+  shell: "vagrant destroy -f"
+  args:
+    chdir: "{{ vd.dest }}"
+  become_user: "{{ vd_vagrant_user }}"
+  when: cmd_result.rc != 0
+
+- name: Setup failed
+  fail:
+    msg: "Got return code {{ cmd_result.rc }}"
+  when: cmd_result.rc != 0
