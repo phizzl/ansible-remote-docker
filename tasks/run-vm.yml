@@ -1,0 +1,12 @@
+---
+- name: Running install.sh in VM
+  shell: "vagrant ssh -c \"cd /vagrant && bash install.sh\""
+  args:
+    chdir: "{{ vd.dest }}"
+  become_user: "{{ vd_vagrant_user }}"
+
+- name: Running run.sh in VM
+  shell: "vagrant ssh -c \"cd /vagrant && bash run.sh\""
+  args:
+    chdir: "{{ vd.dest }}"
+  become_user: "{{ vd_vagrant_user }}"

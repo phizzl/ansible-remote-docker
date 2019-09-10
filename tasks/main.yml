@@ -1,0 +1,16 @@
+---
+- name: Creating backup of authorized keys
+  shell: "cp ~/.ssh/authorized_keys ~/.ssh/authorized_keys.original && echo \"# Managed by Ansible\" >> ~/.ssh/authorized_keys.original"
+  args:
+    creates: "~/.ssh/authorized_keys.original"
+  become_user: "{{ vd_vagrant_user }}"
+
+- name: Restoring authorized_keys
+  shell: "cp ~/.ssh/authorized_keys.original ~/.ssh/authorized_keys"
+  become_user: "{{ vd_vagrant_user }}"
+
+- name: Execute VD tasks
+  include_tasks: run-vagrant-docker.yml
+  loop: "{{ vd_docker_compose_src }}"
+  loop_control:
+    loop_var: vd

@@ -1,0 +1,24 @@
+---
+## The user that should be used to execute Vagrant
+vd_vagrant_user: "{{ vagrant_user | default(ansible_user) }}"
+
+## Configure the directories to run docker in an isolated vagrant box.
+## You also might add a GIT repository to pull the docker-compose.yml from
+##
+## An example configuration you look like this:
+## ```yaml
+## vd_docker_compose_src:
+##  # Switch into the directory and run `docker-compose up -d`
+##  - dest: /home/docker/jenkins
+##  # Clone from GIT and run docker-compose
+##  - repo: https://github.com/bitnami/bitnami-docker-redmine.git
+##    dest: /home/docker/redmine
+##    authorized_keys:
+##      - ssh-rsa abcdefghijklmnopqrstuvwxyz0123456=
+##  # Ensure a service is not running
+##  - dest: /home/docker/jenkins
+##    state: absent
+##  # Provide multiple compose files for docker-compose
+##  - dest: /home/docker/gitlab
+##    files: ["docker-compose.yml", "docker-compose-development.yml"]
+vd_docker_compose_src: []
