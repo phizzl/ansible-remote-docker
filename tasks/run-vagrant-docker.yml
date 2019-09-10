@@ -69,7 +69,7 @@
   become_user: "{{ vd_vagrant_user }}"
 
 - name: Generating summary file
-  shell: "echo \"{{ uuid.stdout }};{{ port.stdout }}\" > .vd_summary"
+  shell: "echo \"{{ vd.dest }};{{ uuid.stdout }};{{ port.stdout }}\" > .vd_summary"
   args:
     chdir: "{{ vd.dest }}"
   become_user: "{{ vd_vagrant_user }}"
