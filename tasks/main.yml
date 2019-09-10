@@ -1,4 +1,10 @@
 ---
+- name: Create .ssh directory
+  shell: "mkdir ~/.ssh && chmod 0700 ~/.ssh"
+  args:
+    creates: "~/.ssh"
+  become_user: "{{ vd_vagrant_user }}"
+
 - name: Create empty authorized_keys file
   shell: "touch ~/.ssh/authorized_keys && chmod 0700 ~/.ssh/authorized_keys"
   args:
