@@ -21,4 +21,5 @@ vd_vagrant_user: "{{ vagrant_user | default(ansible_user) }}"
 ##  # Provide multiple compose files for docker-compose
 ##  - dest: /home/docker/gitlab
 ##    files: ["docker-compose.yml", "docker-compose-development.yml"]
+##    build: true
 vd_docker_compose_src: []
