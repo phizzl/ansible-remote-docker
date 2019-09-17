@@ -22,6 +22,9 @@ the list can have following attributes:
 |----------|-------------|----------|---------|
 | `dest` | Destination to store the setup | yes | / |
 | `repo` | A GIT repository to clone the docker-compose setup from | no | / |
+| `accept_hostkey` | Accept hostkeys when using a GIT repo | no | yes |
+| `version` | The version for the GIT repo to checkout | no | HEAD |
+| `key_file` | The private key file to use for GIT | no | / |
 | `src` | Copy the docker-compose setup from a local path | no | / |
 | `authorized_keys` | The SSH keys that should get access to this machine and the remote host | no | / |
 | `state` | The setup state. It can be `up` for running the setup, `halt` for stopping the setup, or `destroy` for purging the setup | no | `up` |
