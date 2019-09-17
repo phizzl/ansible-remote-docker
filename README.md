@@ -26,6 +26,7 @@ the list can have following attributes:
 | `authorized_keys` | The SSH keys that should get access to this machine and the remote host | no | / |
 | `state` | The setup state. It can be `up` for running the setup, `halt` for stopping the setup, or `destroy` for purging the setup | no | `up` |
 | `files` | The docker-compose.yml files that should be used when running the setup  | no | [] |
+| `build` | docker-compose build?  | no | false |
 
 ###### Example `vd_docker_compose_src`
 
