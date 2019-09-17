@@ -16,6 +16,7 @@
     repo: "{{ vd.repo }}"
     dest: "{{ vd.dest }}/src"
     accept_hostkey: "{{ vd.accept_hostkey| default('yes') }}"
+    version: "{{ vd.version | default('HEAD') }}"
   when: vd.repo is defined and vd.repo != ""
   become_user: "{{ vd_vagrant_user }}"
 
