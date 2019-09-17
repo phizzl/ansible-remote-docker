@@ -10,6 +10,7 @@
     path: "{{ vd.dest }}"
     state: directory
     owner: "{{ vd_vagrant_user }}"
+    recurse: true
 
 - name: Checkout [vd] docker-compose setups
   git:
