@@ -1,5 +1,5 @@
-# Remote Docker
-A role for managing Docker setups within a remote Vagrant machine.
+# Vacker
+A role for booting a **Va**grant machine and running a Do**cker** setup in it 
 
 ## Requirements
 - Hosts should be bootstrapped for ansible usage (have python,...)

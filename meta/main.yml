@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: remote-docker
+  role_name: vacker
   author: phizzl
 
 dependencies:
