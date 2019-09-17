@@ -63,6 +63,7 @@
   args:
     chdir: "{{ vd.dest }}"
   become_user: "{{ vd_vagrant_user }}"
+  when: "vd.state is not defined or vd.state == 'up'"
 
 - name: Get machine ssh port
   shell: "vagrant port --guest 22"
@@ -70,9 +71,11 @@
   args:
     chdir: "{{ vd.dest }}"
   become_user: "{{ vd_vagrant_user }}"
+  when: "vd.state is not defined or vd.state == 'up'"
 
 - name: Generating summary file
   shell: "echo \"{{ vd.dest }};{{ uuid.stdout }};{{ port.stdout }}\" > .vd_summary"
   args:
     chdir: "{{ vd.dest }}"
   become_user: "{{ vd_vagrant_user }}"
+  when: "vd.state is not defined or vd.state == 'up'"
