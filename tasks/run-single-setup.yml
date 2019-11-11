@@ -33,14 +33,10 @@
     - src: "ansible/inventory/hosts.j2"
       dest: "{{ vacker.dest }}/ansible/inventory/hosts"
 
-- name: Running vagrant
-  shell: "vagrant {{ action }} {{ flags }}"
-  args:
-    chdir: "{{ vacker.dest }}"
-  vars:
-    action: "{{ vacker.state | default('up') }}"
-    flags: "{{ '-f' if vacker.state is defined and vacker.state != 'up' else '' }}"
-
 - name: Running VM
   include_tasks: run-vagrant-machine.yml
   when: "vacker.state is not defined or vacker.state == 'up'"
+
+- name: Stopping VM
+  include_tasks: stop-vagrant-machine.yml
+  when: "vacker.state is defined and (vacker.state == 'halt' or vacker.state == 'destroy')"

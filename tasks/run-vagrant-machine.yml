@@ -11,6 +11,14 @@
     dest: "{{ vacker.dest }}/id_rsa_vacker"
   when: vacker.key_file is defined
 
+- name: Running vagrant
+  shell: "vagrant {{ action }} {{ flags }}"
+  args:
+    chdir: "{{ vacker.dest }}"
+  vars:
+    action: "{{ vacker.state | default('up') }}"
+    flags: "{{ vacker.flags | default('') }}"
+
 - name: Running boot.sh in VM
   shell: "vagrant ssh -c \"cd /vagrant && bash boot.sh\""
   args:

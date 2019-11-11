@@ -1,0 +1,5 @@
+---
+- name: Running vagrant
+  shell: "vagrant {{ vacker.state }} -f"
+  args:
+    chdir: "{{ vacker.dest }}"
