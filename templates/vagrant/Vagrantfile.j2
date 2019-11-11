@@ -1,0 +1,6 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+
+  config.vm.synced_folder "data/", "/data"
+  config.vm.synced_folder "ansible/", "/ansible"
+end

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+##Step 1: Docker#####################################
+sudo apt-get update && \
+sudo apt-get -y install software-properties-common apt-transport-https ca-certificates curl gnupg-agent && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+sudo apt-get update && \
+sudo apt-get install -y docker-ce && \
+sudo usermod -a -G docker vagrant
+
+##Step 2: Ansible###################################
+sudo apt-add-repository --yes --update ppa:ansible/ansible && \
+sudo apt-get update && \
+sudo apt install -y ansible python-pip docker-ce && \
+pip install docker docker-compose && \
+
+##Step 3: Ansible role requirements#################
+cd /ansible && \
+ansible-galaxy install -r requirements.yml
+
+##Step 4: Custom install_script from config#########
+{% if vacker.install_script is defined %}{{ vacker.install_script }}{% endif %}

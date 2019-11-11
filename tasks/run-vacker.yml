@@ -1,0 +1,41 @@
+---
+- name: Create destination directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  loop:
+    - "{{ vacker.dest }}"
+    - "{{ vacker.dest }}/ansible/roles"
+    - "{{ vacker.dest }}/ansible/inventory/group_vars"
+    - "{{ vacker.dest }}/data"
+
+- name: Copy template
+  template: "{{ item }}"
+  loop:
+    - src: "vagrant/Vagrantfile.j2"
+      dest: "{{ vacker.dest }}/Vagrantfile"
+    - src: "vagrant/install.sh.j2"
+      dest: "{{ vacker.dest }}/install.sh"
+    - src: "ansible/ansible.cfg.j2"
+      dest: "{{ vacker.dest }}/ansible/ansible.cfg"
+    - src: "ansible/requirements.yml.j2"
+      dest: "{{ vacker.dest }}/ansible/requirements.yml"
+    - src: "ansible/docker.yml.j2"
+      dest: "{{ vacker.dest }}/ansible/docker.yml"
+    - src: "ansible/inventory/hosts.j2"
+      dest: "{{ vacker.dest }}/ansible/inventory/hosts"
+    - src: "ansible/inventory/group_vars/all.yml.j2"
+      dest: "{{ vacker.dest }}/ansible/inventory/group_vars/all.yml"
+
+- name: Running vagrant
+  shell: "vagrant {{ action }} {{ flags }}"
+  args:
+    chdir: "{{ vacker.dest }}"
+  vars:
+    action: "{{ vacker.state | default('up') }}"
+    flags: "{{ '-f' if vacker.state is defined and vacker.state != 'up' else '' }}"
+
+- name: Running VM
+  include_tasks: run-vm.yml
+  when: "vacker.state is not defined or vacker.state == 'up'"

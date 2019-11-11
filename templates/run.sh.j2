@@ -1,9 +1,0 @@
-#!/bin/bash
-
-cd /data && \
-{% if vd.build is defined and vd.build %}docker-compose build && \{% endif %}
-docker-compose up -d {% if vd.files is defined %}-f {{ vd.files | join(' -f ') }}{% endif %}
-
-{% if vd.run_script is defined %}{{ vd.run_script }}{% endif %}
-
-exit ${?}

@@ -2,11 +2,9 @@
 - name: Running install.sh in VM
   shell: "vagrant ssh -c \"cd /vagrant && bash install.sh\""
   args:
-    chdir: "{{ vd.dest }}"
-  become_user: "{{ vd_vagrant_user }}"
+    chdir: "{{ vacker.dest }}"
 
-- name: Running run.sh in VM
-  shell: "vagrant ssh -c \"cd /vagrant && bash run.sh\""
+- name: Running Ansible in VM
+  shell: "vagrant ssh -c \"cd /ansible && ansible-playbook -v -i inventory/hosts docker.yml\""
   args:
-    chdir: "{{ vd.dest }}"
-  become_user: "{{ vd_vagrant_user }}"
+    chdir: "{{ vacker.dest }}"

@@ -1,0 +1,11 @@
+---
+docker_compose_src:
+  - {{ vacker.docker_compose_src | to_nice_yaml(width=5000) | indent(width=4) }}
+authorized_key_list:
+  - name: vagrant
+{% if vacker.authorized_keys is defined and vacker.authorized_keys|length > 0 %}
+    authorized_keys:
+{% for key in vacker.authorized_keys %}
+      - key: "{{ key }}"
+{% endfor %}
+{% endif %}

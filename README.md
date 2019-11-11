@@ -9,11 +9,10 @@ A role for booting a **Va**grant machine and running a Do**cker** setup in it
 
 | Variable | Description | Default value |
 |----------|-------------|---------------|
-| `vd_vagrant_user` | Remote user to run the setup | `vagrant_user or default(ansible_user)` |
-| `vd_docker_compose_src`| List of docker-compose setups **(see details!)**  | `[]` |
+| `vacker_src`| List of docker-compose setups **(see details!)**  | `[]` |
 
 
-#### `vd_docker_compose_src` details
+#### `vacker_src` details
 
 The docker-compose list is used to define the setups to run or terminate per host.   Each item in
 the list can have following attributes:
@@ -66,6 +65,6 @@ vd_docker_compose_src:
 ---
 - hosts: remotedocker
   roles:
-    - role: phizzl.remote-docker
+    - role: phizzl.vacker
       become: yes
 ```

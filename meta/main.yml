@@ -3,7 +3,3 @@ galaxy_info:
   role_name: vacker
   author: phizzl
   description: Role to boot docker compose setups in a isolated vagrant machine on a remote system
-
-dependencies:
-  - role: andrewrothstein.vagrant
-  - role: oefenweb.virtualbox

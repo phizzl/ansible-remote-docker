@@ -1,25 +1,30 @@
 ---
-## The user that should be used to execute Vagrant
-vd_vagrant_user: "{{ vagrant_user | default(ansible_user) }}"
-
 ## Configure the directories to run docker in an isolated vagrant box.
 ## You also might add a GIT repository to pull the docker-compose.yml from
 ##
 ## An example configuration you look like this:
 ## ```yaml
-## vd_docker_compose_src:
-##  # Switch into the directory and run `docker-compose up -d`
-##  - dest: /home/docker/jenkins
-##  # Clone from GIT and run docker-compose
-##  - repo: https://github.com/bitnami/bitnami-docker-redmine.git
-##    dest: /home/docker/redmine
-##    authorized_keys:
-##      - ssh-rsa abcdefghijklmnopqrstuvwxyz0123456=
-##  # Ensure a service is not running
-##  - dest: /home/docker/jenkins
-##    state: absent
-##  # Provide multiple compose files for docker-compose
-##  - dest: /home/docker/gitlab
-##    files: ["docker-compose.yml", "docker-compose-development.yml"]
-##    build: true
-vd_docker_compose_src: []
+## vacker_src:
+##   - dest: /home/vacker/jenkins
+##     state: up
+##     authorized_keys:
+##       - "ssh-rsa ABCDEFGHIJKLM123214345435/sqswq"
+##     docker_compose_src:
+##       repo: https://github.com/bitnami/bitnami-docker-jenkins.git
+##       dest: /home/vagrant/jenkins
+##       inline: |
+##         version: '2'
+##         services:
+##           jenkins:
+##             image: 'bitnami/jenkins:2'
+##             ports:
+##               - '127.0.0.1:10000:8080'
+##             volumes:
+##               - 'jenkins_data:/bitnami'
+##             environment:
+##               - JENKINS_USERNAME=nexus
+##               - JENKINS_PASSWORD=n3xusJ3nk1ns
+##         volumes:
+##           jenkins_data:
+##             driver: local
+vacker_src: []
