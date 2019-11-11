@@ -19,5 +19,11 @@ pip install docker docker-compose && \
 cd /ansible && \
 ansible-galaxy install -r requirements.yml
 
-##Step 4: Custom install_script from config#########
+##Step 4: Setup SSH key for machine#################
+if [ -f /vagrant/id_rsa_vacker ]; then
+    cp -vf /vagrant/id_rsa_vacker /home/vagrant/.ssh/id_rsa && \
+    chmod -v 0700 /home/vagrant/.ssh/id_rsa
+fi
+
+##Step 5: Custom install_script from config#########
 {% if vacker.install_script is defined %}{{ vacker.install_script }}{% endif %}

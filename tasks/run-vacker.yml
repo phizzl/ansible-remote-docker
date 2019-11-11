@@ -28,6 +28,12 @@
     - src: "ansible/inventory/group_vars/all.yml.j2"
       dest: "{{ vacker.dest }}/ansible/inventory/group_vars/all.yml"
 
+- name: Copy private key to Vagrant VM
+  copy:
+    src: "{{ vacker.key_file }}"
+    dest: "{{ vacker.dest }}/id_rsa_vacker"
+  when: vacker.key_file is defined
+
 - name: Running vagrant
   shell: "vagrant {{ action }} {{ flags }}"
   args:
