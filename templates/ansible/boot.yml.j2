@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - role: grog.authorized-key
+      vars:
+        authorized_key_list:
+          - name: vagrant
+{% if vacker.authorized_keys is defined and vacker.authorized_keys|length > 0 %}
+            authorized_keys:
+{% for key in vacker.authorized_keys %}
+              - key: "{{ key }}"
+{% endfor %}
+{% endif %}
+    - role: phizzl.dockercompose
+      become_user: "vagrant"
+      vars:
+        docker_compose_src:
+          - {{ vacker.docker_compose_src | combine({'dest': '/data'}) | to_nice_yaml(width=5000) | indent(width=12) }}

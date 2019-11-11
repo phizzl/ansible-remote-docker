@@ -1,0 +1,22 @@
+---
+- name: Remove private key from /vagrant
+  file:
+    path: "{{ vacker.dest }}/id_rsa_vacker"
+    state: absent
+  when: vacker.key_file is not defined
+
+- name: Copy private key to /vagrant
+  copy:
+    src: "{{ vacker.key_file }}"
+    dest: "{{ vacker.dest }}/id_rsa_vacker"
+  when: vacker.key_file is defined
+
+- name: Running boot.sh in VM
+  shell: "vagrant ssh -c \"cd /vagrant && bash boot.sh\""
+  args:
+    chdir: "{{ vacker.dest }}"
+
+- name: Running Ansible boot.yml in VM
+  shell: "vagrant ssh -c \"cd /ansible && ansible-playbook -v -i inventory/hosts boot.yml\""
+  args:
+    chdir: "{{ vacker.dest }}"

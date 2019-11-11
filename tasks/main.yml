@@ -1,6 +1,6 @@
 ---
 - name: Running vacker setup
-  include_tasks: run-vacker.yml
+  include_tasks: run-single-setup.yml
   loop: "{{ vacker_src }}"
   loop_control:
     loop_var: vacker
