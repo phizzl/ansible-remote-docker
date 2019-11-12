@@ -10,9 +10,6 @@
     - "{{ vacker.dest }}/ansible/roles"
     - "{{ vacker.dest }}/data"
 
-- debug:
-    msg: "{{ vacker.forwarded_ports }}"
-
 - name: "Copy template"
   template: "{{ item }}"
   loop:
